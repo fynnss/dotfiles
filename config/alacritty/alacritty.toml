@@ -1,0 +1,22 @@
+[env]
+TERM= "xterm-256color"
+
+[font]
+normal.family = "Maple Mono NF CN"
+size = 12.0
+
+[window]
+padding.x = 10
+padding.y = 10
+
+# decorations= "Buttonless"
+
+opacity = 0.95
+blur = true
+
+option_as_alt = "Both"
+
+[general]
+import = [
+  "~/.config/alacritty/alacritty-theme/themes/one_dark.toml"
+]
