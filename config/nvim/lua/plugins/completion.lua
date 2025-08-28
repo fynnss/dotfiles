@@ -1,11 +1,20 @@
 return {
-  -- Autocompletion
+  -- Disable LazyVim's blink.cmp completely
+  {
+    "saghen/blink.cmp",
+    enabled = false,
+    cond = false,
+  },
+  -- Autocompletion - force install nvim-cmp
   {
     "hrsh7th/nvim-cmp",
+    priority = 1000,
     event = "InsertEnter",
     dependencies = {
+      "hrsh7th/cmp-nvim-lsp", -- LSP completion source
       "hrsh7th/cmp-buffer", -- source for text in buffer
       "hrsh7th/cmp-path", -- source for file system paths
+      "hrsh7th/cmp-cmdline", -- command line completion
       "L3MON4D3/LuaSnip", -- snippet engine
       "saadparwaiz1/cmp_luasnip", -- for autocompletion
       "rafamadriz/friendly-snippets", -- useful snippets
@@ -51,6 +60,24 @@ return {
             ellipsis_char = "...",
           }),
         },
+      })
+
+      -- Set up cmdline completion
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false }
       })
     end,
   },
